@@ -23,7 +23,7 @@ export class CreateTransactionDto {
 
   @IsString()
   @IsNotEmpty()
-  description: string;
+  name: string;
 
   @IsNumber()
   @IsNotEmpty()
