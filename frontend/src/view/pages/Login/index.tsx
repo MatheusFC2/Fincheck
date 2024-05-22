@@ -1,27 +1,49 @@
 import { Link } from "react-router-dom";
+import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
+import { useLoginController } from "./useLoginController";
 
 export default function Login() {
+  const { handleSubmit, register, errors } = useLoginController();
   return (
-    <div>
-      <header className="flex flex-col items-center gap-4">
-        <h1 className="text-2xl font-bold text-gray-900 tracking[-1px]">
+    <>
+      <header className="flex flex-col items-center gap-4 ">
+        <h1 className="text-2xl font-bold tracking-[-0.1px]">
           Entre em sua conta
         </h1>
+
         <p className="space-x-2">
-          <span className="text-gray-700 tracking-[0.5px]">Novo por aqui?</span>
+          <span className="text-gray-700 tracking-[-0.5px]">
+            Novo por aqui?
+          </span>
           <Link
             to="/register"
-            className="tracking-[0.5px] text-teal-900 font-medium"
+            className="tracking-[-0.5px] font-medium text-teal-900"
           >
-            Cadastre-se
+            Crie uma conta
           </Link>
         </p>
       </header>
-      <form action="submit">
-        <input type="email" />
-        <input type="password" />
-        <button type="submit" className="mt-2"></button>
+
+      <form className="mt-[60px] flex flex-col gap-4" onSubmit={handleSubmit}>
+        <Input
+          type="email"
+          placeholder="E-mail"
+          error={errors.email?.message}
+          {...register("email")}
+        />
+
+        <Input
+          type="password"
+          placeholder="Senha"
+          error={errors.password?.message}
+          {...register("password")}
+        />
+
+        <Button type="submit" className="mt-2">
+          Entrar
+        </Button>
       </form>
-    </div>
+    </>
   );
 }
